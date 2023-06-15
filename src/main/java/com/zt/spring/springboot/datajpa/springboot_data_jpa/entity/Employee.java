@@ -1,4 +1,4 @@
-package com.zt.spring.springboot.springboot_rest.entity;
+package com.zt.spring.springboot.datajpa.springboot_data_jpa.entity;
 
 import jakarta.persistence.*;
 

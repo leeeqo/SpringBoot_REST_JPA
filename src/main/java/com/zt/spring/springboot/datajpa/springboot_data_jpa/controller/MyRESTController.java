@@ -1,11 +1,10 @@
-package com.zt.spring.springboot.springboot_rest.controller;
+package com.zt.spring.springboot.datajpa.springboot_data_jpa.controller;
 
 
-import com.zt.spring.springboot.springboot_rest.entity.Employee;
-import com.zt.spring.springboot.springboot_rest.service.EmployeeService;
+import com.zt.spring.springboot.datajpa.springboot_data_jpa.entity.Employee;
+import com.zt.spring.springboot.datajpa.springboot_data_jpa.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 
 import java.util.List;
 
@@ -48,5 +47,13 @@ public class MyRESTController {
 
         employeeService.deleteEmployee(id);
         return "Employee with ID = " + id + " was deleted.";
+    }
+
+    @GetMapping("/employees/salary/between/{salary1}/{salary2}")
+    public List<Employee> showAllEmployeesBySalaryBetween(
+            @PathVariable int salary1, @PathVariable int salary2) {
+
+        List<Employee> employees = employeeService.findAllBySalaryBetween(salary1, salary2);
+        return employees;
     }
 }

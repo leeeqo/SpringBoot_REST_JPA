@@ -1,6 +1,6 @@
-package com.zt.spring.springboot.springboot_rest.service;
+package com.zt.spring.springboot.datajpa.springboot_data_jpa.service;
 
-import com.zt.spring.springboot.springboot_rest.entity.Employee;
+import com.zt.spring.springboot.datajpa.springboot_data_jpa.entity.Employee;
 
 import java.util.List;
 
@@ -12,4 +12,6 @@ public interface EmployeeService {
     public Employee getEmployee(int id);
 
     public void deleteEmployee(int id);
+
+    public List<Employee> findAllBySalaryBetween(int s1, int s2);
 }

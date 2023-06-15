@@ -1,36 +1,51 @@
-package com.zt.spring.springboot.springboot_rest.service;
+package com.zt.spring.springboot.datajpa.springboot_data_jpa.service;
 
-import com.zt.spring.springboot.springboot_rest.dao.EmployeeDAO;
-import com.zt.spring.springboot.springboot_rest.entity.Employee;
+import com.zt.spring.springboot.datajpa.springboot_data_jpa.dao.EmployeeRepository;
+import com.zt.spring.springboot.datajpa.springboot_data_jpa.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
 
     @Autowired
-    private EmployeeDAO employeeDAO;
+    private EmployeeRepository employeeRepository;
 
-    @Transactional
+    @Override
     public List<Employee> getAllEmployees() {
-        return employeeDAO.getAllEmployees();
+        return employeeRepository.findAll();
     }
 
-    @Transactional
+    @Override
     public void saveEmployee(Employee employee) {
-        employeeDAO.saveEmployee(employee);
+        employeeRepository.save(employee);
     }
 
-    @Transactional
+    @Override
     public Employee getEmployee(int id) {
-        return employeeDAO.getEmployee(id);
+
+        Employee employee = null;
+        Optional<Employee> optional = employeeRepository.findById(id);
+        if (optional.isPresent()) {
+            employee = optional.get();
+        }
+
+        return employee;
     }
 
-    @Transactional
+    @Override
     public void deleteEmployee(int id) {
-        employeeDAO.deleteEmployee(id);
+        employeeRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Employee> findAllBySalaryBetween(int s1, int s2) {
+
+        List<Employee> employees = employeeRepository.findAllBySalaryBetween(s1, s2);
+        return employees;
     }
 }
